@@ -1,9 +1,8 @@
-import { Configuration, OpenAIApi } from "openai";
+import OpenAI from "openai";
 
-const configuration = new Configuration({
+const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
-const openai = new OpenAIApi(configuration);
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -18,7 +17,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const completion = await openai.createChatCompletion({
+    const completion = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages: [
         {
@@ -30,7 +29,8 @@ export default async function handler(req, res) {
       ],
     });
 
-    const answer = completion.data.choices[0].message.content;
+    const answer = completion.choices[0].message.content;
+
     const options = [
       `What are some follow-up questions for: ${userPrompt}?`,
       `How could I go deeper on: ${userPrompt}?`,
