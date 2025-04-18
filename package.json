@@ -1,10 +1,9 @@
 {
   "name": "social-work-gpt-backend",
   "version": "1.0.0",
-  "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js"
+    "start": "node api/gpt.js"
   },
   "dependencies": {
     "body-parser": "^1.20.2",
